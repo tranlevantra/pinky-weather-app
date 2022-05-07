@@ -105,13 +105,25 @@ function search(city) {
     axios.get(apiUrl).then(displayTemperature);
 }
 
+function convertFahrenheit(event) {
+    event.preventDefault();
+    let cityInputElement = document.querySelector("#city-input");
+    search(cityInputElement.value, "imperial");
+}
+
 function handleSubmit(event) {
     event.preventDefault();
     let cityInputElement = document.querySelector("#city-input");
-    search(cityInputElement.value);
+    search(cityInputElement.value, "metric");
 }
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-search("New York");
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click", handleSubmit);
+
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", convertFahrenheit);
+
+search("Hanoi", "metric");
